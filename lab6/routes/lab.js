@@ -4,7 +4,7 @@ const Recording = require('../models/recording');
 
 router.get('/status', function(req, res){
     let zip = req.query.zip;
-    console.log(zip)
+    //console.log(zip)
     let re = /\d{5}/;
     if (!re.test(zip)){
         var errormsg = {"error" : "a zip code is required."}
