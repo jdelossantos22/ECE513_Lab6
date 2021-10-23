@@ -11,7 +11,7 @@ router.get('/status', function(req, res){
         res.status(400).json(errormsg);
         return;
     } 
-    Recording.find({zip:req.query.zip}, function(err, docs){
+    Recording.find({zip:req.query.zip}, {$exists:true}, function(err, docs){
         if (err){
             var errormsg = {"error" : "Zip does not exist in the database."}
             res.status(400).json(errormsg);
