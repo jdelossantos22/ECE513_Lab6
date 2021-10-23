@@ -27,7 +27,13 @@ router.get('/status', function(req, res){
             res.status(400).json(errormsg);
         }
          else{
-            res.status(201).json(docs);
+            //res.status(201).json(docs);
+            let sum = 0
+            for (let i=0; i < docs.length; i++){
+                sum += docs[i].airQuality
+            }
+            let average = (sum/docs.length).toFixed(2)
+            res.status(201).json(average);
          }
     });
 });
