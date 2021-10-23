@@ -11,11 +11,21 @@ router.get('/status', function(req, res){
         res.status(400).json(errormsg);
         return;
     } 
-    Recording.find({zip:req.query.zip}, {$exists:true}, function(err, docs){
+    /*if(Recording.count({zip:req.query.zip}, {limit:1}) == 0){
+        var errormsg = {"error" : "Zip does not exist in the database."}
+        res.status(400).json(errormsg);
+        return;
+    }*/
+    Recording.find({zip:req.query.zip}, function(err, docs){
+        //console.log(docs)
         if (err){
+            var errormsg = {"error" : err}
+            res.status(404).json(errormsg);
+        }
+        else if (docs.length == 0){
             var errormsg = {"error" : "Zip does not exist in the database."}
             res.status(400).json(errormsg);
-         }
+        }
          else{
             res.status(201).json(docs);
          }
